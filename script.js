@@ -115,7 +115,7 @@ function drawScene(){
   ctx.drawImage(cleanCanvas, 0, 0, canvas.width, canvas.height);
 
   if(box){
-    drawBox(box, appState === 'locked' ? 'rgba(0,255,192,0.9)' : 'rgba(255,255,255,0.8)');
+    drawBox(box, (appState === 'locked' || appState === 'countdown') ? 'rgba(0,255,192,0.9)' : 'rgba(255,255,255,0.8)');
   }
   if(lockedBox){
     drawBox(lockedBox, 'rgba(0,200,255,0.6)');
@@ -335,7 +335,11 @@ function updateStability(p1,p2){
 function tryLockBox(p1,p2){
   const r = rectFromPoints(p1,p2);
   if(r.w < CONFIG.MIN_BOX_SIZE_PX || r.h < CONFIG.MIN_BOX_SIZE_PX){ stableAnchor = null; return; }
-  lockedBox = r; box = lockedBox; appState = 'locked'; stableAnchor = null; clickBtn.classList.add('show'); setStatus('Locked — pinch Click, make a fist, or tap it');
+  lockedBox = r;
+  box = lockedBox;
+  appState = 'locked';
+  stableAnchor = null;
+  triggerCapture();
 }
 function handleIdleOrDrawing(){
   if(photoCount >= 3){ appState='done'; setStatus('Strip complete — download it!'); box=null; return; }
@@ -358,28 +362,31 @@ function handleLocked(){
       const cp = canvasPointToClient(h.screenPinch.x, h.screenPinch.y);
       if(clientPointInRect(cp, clickBtn.getBoundingClientRect())){ triggerCapture(); return; }
     }
-    if(h.justFisted){ triggerCapture(); return; }
   }
 }
 function triggerCapture(){
   if(appState!=='locked') return;
-  appState = 'countdown'; clickBtn.classList.remove('show'); startCountdown();
+  appState = 'countdown';
+  if (clickBtn) clickBtn.classList.remove('show');
+  startCountdown(5);
 }
-function startCountdown(){
+function startCountdown(seconds = 5){
   // Ensure any previous countdown is cleared
   if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
-  let n = 5;
+  let n = seconds;
   countdownEl.textContent = n;
   countdownEl.style.display = 'flex';
-  setStatus('Get ready…');
+  setStatus(`Frame locked! Capturing in ${n}…`);
   countdownInterval = setInterval(() => {
     n--;
     if (n > 0) {
       countdownEl.textContent = n;
+      setStatus(`Frame locked! Capturing in ${n}…`);
     } else {
       clearInterval(countdownInterval);
       countdownInterval = null;
-      countdownEl.style.display = 'none';
+      countdownEl.textContent = 'CAPTURE!';
+      setStatus('📸 CAPTURE!');
       doCapture();
     }
   }, CONFIG.COUNTDOWN_STEP_MS);

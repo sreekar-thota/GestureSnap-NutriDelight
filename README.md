@@ -34,9 +34,9 @@ Show both hands to begin the interaction.
 
 Use a pinch gesture to create and lock the photo frame.
 
-**STEP 3 — ✊ Make a Fist to Capture**
+**STEP 3 — ⏱️ Auto-Capture Countdown**
 
-Make a fist to trigger the photo capture.
+Once locked, the 5-second countdown begins automatically and captures the photo at 0 without any extra gesture.
 
 ---
 
@@ -97,9 +97,7 @@ QR generation and download functionality
         ↓
 4. Pinch to lock the frame
         ↓
-5. Make a fist
-        ↓
-6. Countdown begins
+5. 5-second countdown begins automatically
         ↓
 7. Photo captured
         ↓
