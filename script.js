@@ -156,7 +156,8 @@ function landmarkToScreen(lm){
 function getCanvasDisplayTransform(){
   const rect = canvas.getBoundingClientRect();
   const iw = canvas.width || 1, ih = canvas.height || 1;
-  const isCover = stageEl.classList.contains('compact');
+  const computedFit = (window.getComputedStyle ? window.getComputedStyle(canvas).objectFit : '') || '';
+  const isCover = computedFit === 'cover' || stageEl.classList.contains('compact');
   const scale = isCover ? Math.max(rect.width/iw, rect.height/ih)
                         : Math.min(rect.width/iw, rect.height/ih);
   const drawW = iw*scale, drawH = ih*scale;

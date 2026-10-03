@@ -1466,38 +1466,169 @@ footer {
 }
 
 /* ==========================================
-   DEDICATED 1080 x 1920 PORTRAIT TV HEADER & FOOTER OVERRIDE
+   DEDICATED 1080 x 1920 PORTRAIT SMART TV LAYOUT
 ========================================== */
-@media (min-width: 900px) and (max-width: 1080px) and (min-height: 1600px) and (orientation: portrait) {
+@media (min-width: 768px) and (max-width: 1120px) and (min-height: 1500px) and (orientation: portrait),
+       (min-height: 1600px) and (max-aspect-ratio: 10/16) {
 
     header {
-        height: 110px !important;
+        height: 90px !important;
         padding: 0 40px !important;
+        flex-shrink: 0 !important;
     }
 
     .logo h1,
     .blur-text-title,
     .blur-text-title .blur-char,
     .blur-text-title .blur-snap {
-        font-size: 34px !important;
+        font-size: 32px !important;
     }
 
     .tagline {
-        font-size: 20px !important;
+        font-size: 18px !important;
     }
 
     .top-buttons {
-        gap: 16px !important;
+        gap: 14px !important;
     }
 
     .top-buttons button {
-        font-size: 20px !important;
-        padding: 14px 28px !important;
+        font-size: 18px !important;
+        padding: 12px 24px !important;
+    }
+
+    main {
+        padding: 16px 30px 10px !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 16px !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .camera-section {
+        width: 860px !important;
+        max-width: 900px !important;
+        height: auto !important;
+        flex: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 16px !important;
+        margin: 0 auto !important;
+    }
+
+    .camera-card {
+        width: 100% !important;
+        max-width: 880px !important;
+        height: 1180px !important;
+        min-height: 1100px !important;
+        max-height: 1250px !important;
+        flex: none !important;
+        margin: 0 auto !important;
+        border-radius: 28px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        box-shadow: 0 12px 48px rgba(255, 138, 0, 0.32), 0 0 20px rgba(255, 209, 102, 0.2), 0 4px 16px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    .camera-top {
+        height: 54px !important;
+        padding: 0 28px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .live {
+        font-size: 16px !important;
+        padding: 5px 16px !important;
+    }
+
+    .status {
+        font-size: 14px !important;
+        padding: 7px 20px !important;
+    }
+
+    .camera-frame {
+        width: 100% !important;
+        flex: 1 !important;
+        height: calc(100% - 54px) !important;
+        min-height: 0 !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    #stage {
+        width: 100% !important;
+        height: 100% !important;
+        position: relative !important;
+        overflow: hidden !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    canvas,
+    .camera-frame canvas {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+    }
+
+    .photo-counter {
+        font-size: 1.3rem !important;
+        padding: 8px 22px !important;
+        top: 20px !important;
+        right: 20px !important;
+    }
+
+    .progress-dots-container {
+        bottom: 20px !important;
+        padding: 8px 22px !important;
+        gap: 16px !important;
+    }
+
+    .dot-item {
+        font-size: 1.6rem !important;
+    }
+
+    .tips {
+        width: 100% !important;
+        max-width: 860px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .instruction-card {
+        padding: 12px 26px !important;
+        border-radius: 18px !important;
+        gap: 18px !important;
+        width: 100% !important;
+        height: 56px !important;
+        box-shadow: 0 4px 20px rgba(255, 138, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    .emoji {
+        font-size: 1.95rem !important;
+    }
+
+    .instruction-text {
+        font-size: 1.12rem !important;
+        letter-spacing: 0.4px !important;
     }
 
     footer {
-        padding: 24px 40px 30px !important;
-        font-size: 18px !important;
-        min-height: 70px !important;
+        height: 52px !important;
+        padding: 12px 40px 16px !important;
+        font-size: 14px !important;
+        flex-shrink: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
 }
