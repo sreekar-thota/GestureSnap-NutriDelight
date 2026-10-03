@@ -75,16 +75,21 @@ exports.handler = async (event, context) => {
 
   try {
     const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
-      console.error('Supabase configuration error: SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY missing from environment.');
+      const missingVars = [];
+      if (!supabaseUrl) missingVars.push('SUPABASE_URL');
+      if (!supabaseKey) missingVars.push('SUPABASE_SERVICE_ROLE_KEY');
+      const errorMsg = `Server configuration error: Missing environment variable(s): ${missingVars.join(', ')}. Please add them in Netlify Site configuration -> Environment variables.`;
+      console.error(errorMsg);
       return {
         statusCode: 500,
         headers,
         body: JSON.stringify({
           success: false,
-          error: 'Server configuration error: Supabase credentials missing.',
+          error: errorMsg,
+          missing: missingVars,
         }),
       };
     }
