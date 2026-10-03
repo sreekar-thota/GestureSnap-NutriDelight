@@ -1,0 +1,17 @@
+{
+  "name": "gesturesnap-2.0",
+  "version": "2.0.0",
+  "description": "GestureSnap AI Photo Booth - Netlify Ready",
+  "main": "server.py",
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "python server.py"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.0.0",
+    "@supabase/supabase-js": "^2.112.3"
+  },
+  "devDependencies": {
+    "netlify-cli": "^27.1.2"
+  }
+}

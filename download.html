@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GestureSnap AI - Your Photo Strip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F0D0A;
+            --panel: #1A1713;
+            --panel2: #252019;
+            --orange: #FF8A00;
+            --orange2: #FFB13B;
+            --orange-dark: #C96500;
+            --gold: #FFD166;
+            --text: #FFF4D6;
+            --text2: #B8A98C;
+            --border: rgba(255, 138, 0, 0.3);
+            --radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 16px 40px;
+            background-image:
+                radial-gradient(circle at top, var(--border), transparent 50%),
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #000;
+            border: 2px solid var(--orange);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px var(--orange);
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--orange);
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 15px var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            color: var(--orange2);
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            font-size: 0.85rem;
+            color: var(--text2);
+            margin-bottom: 20px;
+        }
+
+        .preview-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+            background: #000;
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        #stripPreviewImg {
+            max-width: 100%;
+            height: auto;
+            max-height: 60vh;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            display: block;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 40px;
+            background: linear-gradient(90deg, var(--orange), var(--orange2));
+            color: #ffffff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--border);
+            transition: all 0.25s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+
+        footer {
+            margin-top: auto;
+            padding-top: 30px;
+            font-size: 12px;
+            color: var(--text2);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo-icon">
+            <svg viewBox="0 0 100 100" width="26" height="26">
+                <circle cx="50" cy="50" r="44" fill="#0c0c0c" stroke="#ff7a00" stroke-width="6" />
+                <g fill="#ff7a00">
+                    <path d="M50,14 L75,38 L48,46 Z" />
+                    <path d="M78,28 L82,62 L56,50 Z" />
+                    <path d="M82,66 L56,86 L50,58 Z" />
+                    <path d="M50,86 L25,62 L52,54 Z" />
+                    <path d="M22,72 L18,38 L44,50 Z" />
+                    <path d="M18,34 L44,14 L50,42 Z" />
+                </g>
+                <circle cx="50" cy="50" r="14" fill="#000000" stroke="#ff7a00" stroke-width="3" />
+            </svg>
+        </div>
+        <div class="logo">
+            <h1>Gesture<span>Snap</span> AI</h1>
+        </div>
+    </header>
+
+    <div class="card">
+        <h2>🎉 Your Photo Strip is Ready!</h2>
+        <p>Tap the button below to download the high-resolution photo strip directly to your phone.</p>
+
+        <div class="preview-container">
+            <img id="stripPreviewImg" alt="GestureSnap Photo Strip" />
+        </div>
+
+        <button id="downloadBtn" class="download-btn">
+            <span>↓</span> Download Photo Strip
+        </button>
+    </div>
+
+    <footer>
+        GestureSnap AI © 2026 • Private & Secure Photo Booth
+    </footer>
+
+    <script>
+        (function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const photoParam = urlParams.get('id') || urlParams.get('url');
+            const stripImg = document.getElementById('stripPreviewImg');
+            const downloadBtn = document.getElementById('downloadBtn');
+
+            function showExpiredMessage() {
+                const card = document.querySelector('.card');
+                if (card) {
+                    card.innerHTML = '<h2>⚠️ Photo Strip Expired</h2><p>This temporary photo strip has expired and been deleted from storage for your privacy.</p><p style="margin-top: 15px; font-size: 0.8rem; color: var(--text2);">Please capture a new photo strip at the photo booth to generate a fresh QR code.</p>';
+                }
+            }
+
+            if (photoParam) {
+                let previewUrl = '';
+                let downloadUrl = '';
+
+                if (photoParam.startsWith('http://') || photoParam.startsWith('https://')) {
+                    previewUrl = photoParam;
+                    downloadUrl = `/api/download?url=${encodeURIComponent(photoParam)}&download=1`;
+                } else {
+                    const cleanId = photoParam.replace(/[^a-zA-Z0-9_.-]/g, '');
+                    previewUrl = `/api/download?id=${encodeURIComponent(cleanId)}`;
+                    downloadUrl = `/api/download?id=${encodeURIComponent(cleanId)}&download=1`;
+                }
+
+                stripImg.onerror = function () {
+                    showExpiredMessage();
+                };
+
+                stripImg.src = previewUrl;
+
+                downloadBtn.addEventListener('click', async function () {
+                    try {
+                        const res = await fetch(downloadUrl);
+                        if (!res.ok) {
+                            showExpiredMessage();
+                            return;
+                        }
+                        const blob = await res.blob();
+                        const blobUrl = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = blobUrl;
+                        link.download = `GestureSnap-PhotoStrip-${new Date().toISOString().slice(0, 10)}.png`;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+                    } catch (e) {
+                        window.location.href = downloadUrl;
+                    }
+                });
+            } else {
+                document.querySelector('.card').innerHTML = '<h2>Photo Strip Not Found</h2><p>Please scan a valid GestureSnap QR code from the photo booth.</p>';
+            }
+        })();
+    </script>
+</body>
+
+</html>

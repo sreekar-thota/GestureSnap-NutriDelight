@@ -1,0 +1,12 @@
+uploads/*
+!uploads/.gitkeep
+*.db
+*.db-journal
+.vscode/
+__pycache__/
+*.pyc
+node_modules
+
+# Local Netlify folder
+.netlify
+.env

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GestureSnap </title>
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- =========================
+BACKGROUND
+========================= -->
+
+    <div class="bg-gradient"></div>
+
+    <div class="bg-grid"></div>
+
+    <!-- =========================
+HEADER
+========================= -->
+
+    <header>
+
+        <div class="logo">
+
+            <div>
+
+                <h1>
+
+                    Gesture<span>Snap</span>
+
+                </h1>
+
+                <p class="tagline">
+                    <span class="dot">●</span> Gesture <span class="dot">●</span> Capture <span class="dot">●</span>
+                    Print
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="top-buttons">
+
+            <button id="viewToggleBtn">
+
+                <span>⛶</span>
+
+                Fullscreen
+
+            </button>
+            <button id="resetBtn" title="Reset session">
+                <span>↻</span>
+                Reset
+            </button>
+            <button id="downloadBtn" title="Download Photo Strip">
+                <span>⬇</span>
+                Download Strip
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- =========================
+MAIN
+========================= -->
+
+    <main>
+
+        <!-- =========================
+LEFT SIDE
+========================= -->
+
+        <section class="camera-section">
+
+            <div class="camera-card">
+
+                <div class="camera-top">
+
+                    <div class="live">
+
+                        <span class="live-dot"></span>
+
+                        LIVE CAMERA
+
+                    </div>
+
+                    <div id="statusPill" class="status">
+
+                        Waiting...
+
+                    </div>
+
+                </div>
+
+                <div class="camera-frame" id="stage">
+
+                    <canvas id="stageCanvas">
+
+                    </canvas>
+
+                    <div id="photoCounter" class="photo-counter">
+                        <span class="counter-num" id="counterNum">0</span>
+                        <span class="counter-slash">/</span>
+                        <span class="counter-total">3</span>
+                    </div>
+                    <div id="progressIndicator" class="progress-dots-container">
+                        <span class="dot-item active" id="dot0">●</span>
+                        <span class="dot-item inactive" id="dot1">○</span>
+                        <span class="dot-item inactive" id="dot2">○</span>
+                    </div>
+                    <div id="captureFeedback" class="capture-feedback hidden">📸 CAPTURED!</div>
+                    <button id="clickBtn">
+
+                        Capture
+
+                    </button>
+
+                    <div id="countdownEl">
+
+                        5
+
+                    </div>
+
+                    <div id="flashEl">
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <div class="tips">
+                <div class="instruction-card">
+                    <div class="emoji">✋</div>
+                    <div class="instruction-text">Show Both Hands</div>
+                </div>
+                <div class="instruction-card">
+                    <div class="emoji">🤏</div>
+                    <div class="instruction-text">Pinch to Lock Frame</div>
+                </div>
+                <div class="instruction-card">
+                    <div class="emoji">✊</div>
+                    <div class="instruction-text">Make a Fist to Capture</div>
+                </div>
+            </div>
+
+        </section>
+        <!-- Photo strip preview container -->
+        <div id="stripPreviewContainer" class="strip-preview hidden"></div>
+        <!-- =========================
+RIGHT SIDEBAR
+========================= -->
+
+
+        <!-- =========================
+END MAIN
+========================= -->
+
+    </main>
+
+    <!-- =========================
+FOOTER
+========================= -->
+
+    <footer>
+
+        <div class="footer-left">
+
+            GestureSnap © 2026 — By Sreekar Thota
+
+        </div>
+
+    </footer>
+
+    <!-- =========================
+HIDDEN VIDEO
+========================= -->
+
+    <video id="video" playsinline autoplay muted style="display:none;">
+
+    </video>
+
+    <!-- =========================
+BACKGROUND EFFECTS
+========================= -->
+
+    <div class="floating-circle one"></div>
+
+    <div class="floating-circle two"></div>
+
+    <div class="floating-circle three"></div>
+
+    <div class="floating-circle four"></div>
+
+    <!-- =========================
+MEDIAPIPE & QRCODE
+========================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+    </script>
+
+    <!-- =========================
+QR MODAL
+========================= -->
+    <div id="qrModal" class="qr-modal hidden">
+        <div class="qr-modal-content">
+            <div class="qr-header">
+                <h2>🎉 YOUR PHOTO STRIP IS READY!</h2>
+                <button id="closeQrModalBtn" class="close-modal-btn">✕</button>
+            </div>
+            <div class="qr-body">
+                <div class="strip-preview-col">
+                    <img id="qrStripPreview" alt="Final Photo Strip" />
+                </div>
+                <div class="qr-code-col">
+                    <h3>📱 SCAN TO DOWNLOAD</h3>
+                    <div id="qrcode"></div>
+                    <div class="qr-timer-box">
+                        <div class="qr-timer-title">📱 QR AVAILABLE FOR</div>
+                        <div id="qrTimerEl" class="qr-timer-countdown">60s</div>
+                    </div>
+                    <p class="qr-instructions">Scan the QR code with your phone to download your photo strip.</p>
+                    <button id="modalDownloadBtn" class="download-btn-large">
+                        <span>⬇</span> Download Strip
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================
+YOUR SCRIPT
+========================= -->
+
+    <script src="script.js">
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/upload"
+  to = "/.netlify/functions/upload"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/download"
+  to = "/.netlify/functions/download"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/delete"
+  to = "/.netlify/functions/delete"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/invalidate"
+  to = "/.netlify/functions/delete"
+  status = 200
+  force = true
