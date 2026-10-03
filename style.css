@@ -1472,7 +1472,8 @@ footer {
        (min-height: 1600px) and (max-aspect-ratio: 10/16) {
 
     header {
-        height: 90px !important;
+        height: 88px !important;
+        margin-top: 14px !important;
         padding: 0 40px !important;
         flex-shrink: 0 !important;
     }
@@ -1498,10 +1499,10 @@ footer {
     }
 
     main {
-        padding: 16px 30px 10px !important;
-        justify-content: flex-start !important;
+        padding: 0 30px !important;
+        justify-content: center !important;
         align-items: center !important;
-        gap: 16px !important;
+        gap: 0 !important;
         flex: 1 !important;
         min-height: 0 !important;
         overflow: hidden !important;
@@ -1515,16 +1516,16 @@ footer {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        gap: 16px !important;
-        margin: 0 auto !important;
+        gap: 18px !important;
+        margin: 20px auto 0 !important;
     }
 
     .camera-card {
         width: 100% !important;
         max-width: 880px !important;
         height: 1180px !important;
-        min-height: 1100px !important;
-        max-height: 1250px !important;
+        min-height: 1180px !important;
+        max-height: 1180px !important;
         flex: none !important;
         margin: 0 auto !important;
         border-radius: 28px !important;
@@ -1598,33 +1599,34 @@ footer {
         max-width: 860px !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 10px !important;
+        gap: 12px !important;
         margin-top: 0 !important;
         margin-bottom: 0 !important;
         flex-shrink: 0 !important;
     }
 
     .instruction-card {
-        padding: 12px 26px !important;
+        padding: 14px 28px !important;
         border-radius: 18px !important;
         gap: 18px !important;
         width: 100% !important;
-        height: 56px !important;
+        height: 60px !important;
         box-shadow: 0 4px 20px rgba(255, 138, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.7) !important;
     }
 
     .emoji {
-        font-size: 1.95rem !important;
+        font-size: 2rem !important;
     }
 
     .instruction-text {
-        font-size: 1.12rem !important;
+        font-size: 1.15rem !important;
         letter-spacing: 0.4px !important;
     }
 
     footer {
         height: 52px !important;
-        padding: 12px 40px 16px !important;
+        padding: 10px 40px 16px !important;
+        margin-bottom: 8px !important;
         font-size: 14px !important;
         flex-shrink: 0 !important;
         display: flex !important;
